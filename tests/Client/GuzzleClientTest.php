@@ -11,7 +11,7 @@ class GuzzleClientTest extends TestCase
 {
     public function testGetOption()
     {
-        $client = new GuzzleClient('http://test.com/', '/', ['first' => 1]);
+        $client = new GuzzleClient('http://localhost:8000/', '/', ['first' => 1]);
 
         static::assertEquals(1, $client->getOption('first'));
         static::assertNull($client->getOption('second'));
@@ -19,7 +19,7 @@ class GuzzleClientTest extends TestCase
 
     public function testCreateRequest()
     {
-        $client  = new GuzzleClient('http://test.com/', '/', ['first' => 1]);
+        $client  = new GuzzleClient('http://localhost:8000/', '/', ['first' => 1]);
         $request = $client->createRequest('GET', '/me');
 
         static::assertInstanceOf(RequestInterface::class, $request);
@@ -27,7 +27,7 @@ class GuzzleClientTest extends TestCase
 
     public function testSend()
     {
-        $client  = new GuzzleClient('http://test.com/', '/', ['first' => 1]);
+        $client  = new GuzzleClient('http://localhost:8000/', '/', ['first' => 1]);
         $request = $client->createRequest('GET', '/me');
 
         try {

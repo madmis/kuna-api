@@ -36,8 +36,8 @@ or [create pull request](https://github.com/madmis/kuna-api/compare)
 ```php
 $api = new KunaApi(
     'https://kuna.io',
-    'gw5DeZxEqfKu3Jlvyi3ah3iIxthqFySqDMWw1TW3',
-    'fXhLfyXBP7jJH6l8Ts74knx6LhUKfgmmZhdPamIx'
+    'public key',
+    'secret key'
 );
 $timestamp = $api->shared()->timestamp();
 ```
@@ -117,6 +117,10 @@ To run the tests, you'll need to install [phpunit](https://phpunit.de/).
 Easiest way to do this is through composer.
 
     composer install
+
+Tests required running php built in server on 8000 port.
+
+    php -S localhost:8000
 
 ### Running Unit tests
 
