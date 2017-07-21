@@ -55,3 +55,4 @@ Easiest way to do this is through composer.
 
 [coverage-link]: https://coveralls.io/github/madmis/kuna-api?branch=master
 [coverage-image]: https://coveralls.io/repos/github/madmis/kuna-api/badge.svg?branch=master
+
