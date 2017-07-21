@@ -44,8 +44,8 @@ Easiest way to do this is through composer.
 [testing-link]: https://travis-ci.org/madmis/kuna-api
 [testing-image]: https://travis-ci.org/madmis/kuna-api.svg?branch=master
 
-[sensiolabs-insight-link]: https://insight.sensiolabs.com/projects/7332bbe0-7ecf-4228-afdb-e599c60c9aa0
-[sensiolabs-insight-image]: https://insight.sensiolabs.com/projects/7332bbe0-7ecf-4228-afdb-e599c60c9aa0/mini.png
+[sensiolabs-insight-link]: https://insight.sensiolabs.com/projects/77152883-412e-4a91-86b6-fb976243a020
+[sensiolabs-insight-image]: https://insight.sensiolabs.com/projects/77152883-412e-4a91-86b6-fb976243a020/mini.png
 
 [package-link]: https://packagist.org/packages/madmis/kuna-api
 [downloads-image]: https://poser.pugx.org/madmis/kuna-api/downloads
