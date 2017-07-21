@@ -8,6 +8,7 @@
 [![License][license-image]][license-link]
 
 [Kuna.io](https://kuna.io/documents/api) provides REST APIs that you can use to interact with platform programmatically.
+
 This API client will help you interact with Kuna by REST API. 
  
 
@@ -15,7 +16,7 @@ This API client will help you interact with Kuna by REST API.
 
 MIT License
 
-# Kuan REST API Reference
+# Kuna REST API Reference
 
 https://kuna.io/documents/api
 

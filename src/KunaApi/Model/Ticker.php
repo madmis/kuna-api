@@ -7,7 +7,6 @@ use JMS\Serializer\Annotation\AccessType;
 
 /**
  * Class Ticker
- *
  * @package madmis\KunaApi\Model
  * @AccessType("public_method")
  */
@@ -36,7 +35,6 @@ class Ticker
     /**
      * The lowest transaction price for 24 hours
      * @Type("float")
-     *
      * @var float
      */
     private $low;
@@ -44,7 +42,6 @@ class Ticker
     /**
      * The highest transaction price for 24 hours
      * @Type("float")
-     *
      * @var float
      */
     private $high;
@@ -52,7 +49,6 @@ class Ticker
     /**
      * Last transaction price
      * @Type("float")
-     *
      * @var float
      */
     private $last;
@@ -60,7 +56,6 @@ class Ticker
     /**
      * Trading volume in base currency for 24 hours
      * @Type("float")
-     *
      * @var float
      */
     private $vol;
@@ -68,7 +63,6 @@ class Ticker
     /**
      * Total trading amount in quoted currency for 24 hours
      * @Type("float")
-     *
      * @var float
      */
     private $price;
