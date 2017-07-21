@@ -14,7 +14,7 @@ install:
 
 before_script:
     - mkdir -p build/logs
-    - php -S localhost:8000
+    - php -S localhost:8000 &
 
 
 script:
