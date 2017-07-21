@@ -21,6 +21,13 @@ class KunaApiTest extends \PHPUnit\Framework\TestCase
             \madmis\KunaApi\Client\GuzzleClient::class,
             $api->getClient()
         );
+
+        $mock = $this->createMock(\madmis\KunaApi\Client\ClientInterface::class);
+        $api->setClient($mock);
+        $this->assertInstanceOf(
+            \madmis\KunaApi\Client\ClientInterface::class,
+            $api->getClient()
+        );
     }
 
     public function testGetShared()
