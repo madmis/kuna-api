@@ -182,10 +182,11 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     {
         $request = $this->client->createRequest($method, $uri);
 
-        $options['query'] = $this->signQuery(
+        $key = $method === Http::GET ? 'query' : 'form_params';
+        $options[$key] = $this->signRequest(
             $method,
             $request->getUri()->__toString(),
-            $options['query'] ?? []
+            $options[$key] ?? []
         );
 
         return $this->processResponse(
@@ -199,7 +200,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
      * @param array $query
      * @return array
      */
-    protected function signQuery(string $method, string $uri, array $query): array
+    protected function signRequest(string $method, string $uri, array $query): array
     {
         $query = array_merge($query, [
             'tonce' => $this->getTonce(),

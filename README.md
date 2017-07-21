@@ -7,30 +7,112 @@
 [![Total Downloads][downloads-image]][package-link]
 [![License][license-image]][license-link]
 
-[Kuna.io](https://kuna.io/documents/api) provides REST APIs that you can use to interact with platform programmatically.
+[Kuna.io](https://kuna.io/documents/api) provides REST APIs that you can use
+ to interact with platform programmatically.
 
 This API client will help you interact with Kuna by REST API. 
  
 
-# License
+## License
 
 MIT License
 
-# Kuna REST API Reference
+## Kuna REST API Reference
 
 https://kuna.io/documents/api
 
-# Contributing
-To create new endpoint - [create issue](https://github.com/madmis/kuna-api/issues/new) or [create pull request](https://github.com/madmis/kuna-api/compare)
 
-# Install
+## Contributing
+To create new endpoint - [create issue](https://github.com/madmis/kuna-api/issues/new) 
+or [create pull request](https://github.com/madmis/kuna-api/compare)
+
+
+## Install
     
     composer require madmis/kuna-api 1.0.*
 
-# Usage
+
+## Usage
+```php
+$api = new KunaApi(
+    'https://kuna.io',
+    'gw5DeZxEqfKu3Jlvyi3ah3iIxthqFySqDMWw1TW3',
+    'fXhLfyXBP7jJH6l8Ts74knx6LhUKfgmmZhdPamIx'
+);
+$timestamp = $api->shared()->timestamp();
+```
+###Mapping
+
+Each endpoint response (exclude: timestamp) can be received as `array` or as `object`.
+
+To use mapping response to `object` set parameter `$mapping` to `true`. 
+
+```php
+$issue = $api->signed()->activeOrders(Http::PAIR_ETHUAH, true);
+
+// Result
+[
+    {
+    class madmis\KunaApi\Model\Order {
+        protected $id => 10003
+        protected $side => "sell"
+        protected $ordType => "limit"
+        protected $price => 10000
+        protected $avgPrice => 0
+        protected $state => "wait"
+        protected $market => "ethuah"
+        protected $createdAt => DateTime
+        protected $volume => 0.01
+        protected $volume => 0.01
+        protected $remainingVolume => 0.01
+        protected $executedVolume => 0
+        protected $tradesCount => 0
+      }
+    
+    },
+    ...
+] 
+```
+
+###Error handling
+Each client request errors wrapped to custom exception **madmis\KunaApi\Exception\ClientException**  
+
+```php
+class madmis\KunaApi\Exception\ClientException {
+  private $request => class GuzzleHttp\Psr7\Request
+  private $response => NULL
+  protected $message => "cURL error 7: Failed to connect to 127.0.0.1 port 8080: Connection refused (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)"
+  ...
+}
+```
+
+**ClientException** contains original **request object** and **response object** if response available
+
+```php
+class madmis\KunaApi\Exception\ClientException {
+  private $request => class GuzzleHttp\Psr7\Request 
+  private $response => class GuzzleHttp\Psr7\Response {
+    private $reasonPhrase => "Unauthorized"
+    private $statusCode => 401
+    ...
+  }
+  protected $message => "Client error: 401"
+  ...  
+}
+```
+
+So, to handle errors use try/catch
+
+```php
+try {
+    $api->signed()->activeOrders(Http::PAIR_ETHUAH, true);
+} catch (madmis\KunaApi\Exception\ClientException $ex) {
+    // any actions (log error, send email, ...) 
+}
+``` 
 
 
-# Running the tests
+## Running the tests
 To run the tests, you'll need to install [phpunit](https://phpunit.de/). 
 Easiest way to do this is through composer.
 
