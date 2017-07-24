@@ -33,11 +33,16 @@ class KunaApi
     private $secretKey;
 
     /**
+     * @var EndpointFactory
+     */
+    private $endpointFactory;
+
+    /**
      * @param string $baseUri example: http://localhost:8080
      * @param string $publicKey
      * @param string $secretKey
-     * @param string $apiUrn example: /api/v2
-     * @param array $options extra parameters
+     * @param string $apiUrn  example: /api/v2
+     * @param array  $options extra parameters
      */
     public function __construct(
         string $baseUri,
@@ -46,9 +51,9 @@ class KunaApi
         string $apiUrn = '/api/v2',
         array $options = []
     ) {
-        $this->client = new GuzzleClient($baseUri, $apiUrn, $options);
-        $this->publicKey = $publicKey;
-        $this->secretKey = $secretKey;
+        $this->client          = new GuzzleClient($baseUri, $apiUrn, $options);
+        $this->publicKey       = $publicKey;
+        $this->secretKey       = $secretKey;
         $this->endpointFactory = new EndpointFactory();
     }
 
