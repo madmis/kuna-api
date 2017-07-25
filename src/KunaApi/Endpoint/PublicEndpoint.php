@@ -30,7 +30,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     /**
      * @param string $pair
      * @param bool $mapping
-     * @return array|Ticker[]
+     * @return array|Ticker
      * @throws ClientException
      */
     public function tickers(string $pair, bool $mapping = false)
