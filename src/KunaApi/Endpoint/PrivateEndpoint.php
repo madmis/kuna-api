@@ -4,6 +4,7 @@ namespace madmis\KunaApi\Endpoint;
 
 use madmis\KunaApi\Client\ClientInterface;
 use madmis\KunaApi\Exception\ClientException;
+use madmis\KunaApi\Exception\IncorrectResponseException;
 use madmis\KunaApi\Http;
 use madmis\KunaApi\Model\History;
 use madmis\KunaApi\Model\Me;
@@ -19,7 +20,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
      * @param ClientInterface $client
-     * @param array $options
+     * @param array           $options
      */
     public function __construct(ClientInterface $client, array $options = [])
     {
@@ -31,6 +32,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param bool $mapping
+     *
      * @return array|Me
      * @throws ClientException
      */
@@ -47,9 +49,10 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param float $volume volume in base currency
-     * @param float $price price per base currency unit
-     * @param bool $mapping
+     * @param float  $volume volume in base currency
+     * @param float  $price  price per base currency unit
+     * @param bool   $mapping
+     *
      * @return array|Order
      * @throws ClientException
      */
@@ -60,9 +63,10 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param float $volume volume in base currency
-     * @param float $price price per base currency unit
-     * @param bool $mapping
+     * @param float  $volume volume in base currency
+     * @param float  $price  price per base currency unit
+     * @param bool   $mapping
+     *
      * @return array|Order
      * @throws ClientException
      */
@@ -74,9 +78,10 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     /**
      * @param string $side
      * @param string $pair
-     * @param float $volume volume in base currency
-     * @param float $price price per base currency unit
-     * @param bool $mapping
+     * @param float  $volume volume in base currency
+     * @param float  $price  price per base currency unit
+     * @param bool   $mapping
+     *
      * @return array|Order
      * @throws ClientException
      */
@@ -84,10 +89,10 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     {
         $options = [
             'form_params' => [
-                'side' => $side,
+                'side'   => $side,
                 'market' => $pair,
                 'volume' => $volume,
-                'price' => $price,
+                'price'  => $price,
             ],
         ];
 
@@ -101,14 +106,15 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * @param int $orderId
+     * @param int  $orderId
      * @param bool $mapping
+     *
      * @return array|Order
      * @throws ClientException
      */
     public function cancelOrder(int $orderId, bool $mapping = false)
     {
-        $options = ['form_params' => ['id' => $orderId]];
+        $options  = ['form_params' => ['id' => $orderId]];
         $response = $this->sendRequest(Http::POST, $this->getApiUrn(['order', 'delete']), $options);
 
         if ($mapping) {
@@ -120,16 +126,29 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|Order[]
      * @throws ClientException
+     * @throws IncorrectResponseException
      */
     public function activeOrders(string $pair, bool $mapping = false): array
     {
         $options = [
             'query' => ['market' => $pair],
         ];
+
+        //sometimes instead of active orders
+        // this request return market cap (https://kuna.io/api/v2/order_book?market=btcuah)
         $response = $this->sendRequest(Http::GET, $this->getApiUrn(['orders']), $options);
+
+        if (empty($response[0]['id'])) {
+            throw new IncorrectResponseException(
+                'Incorrect response',
+                $this->client->getLastRequest(),
+                $response
+            );
+        }
 
         if ($mapping) {
             $response = $this->deserializeItems($response, Order::class);
@@ -140,13 +159,14 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|History[]
      * @throws ClientException
      */
     public function myHistory(string $pair, bool $mapping = false): array
     {
-        $options = [
+        $options  = [
             'query' => ['market' => $pair],
         ];
         $response = $this->sendRequest(Http::GET, $this->getApiUrn(['trades', 'my']), $options);
@@ -161,6 +181,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param OptionsResolver $resolver
+     *
      * @throws AccessException
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -171,10 +192,11 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * @param string $method Http::GET|POST
+     * @param string $method            Http::GET|POST
      * @param string $uri
-     * @param array $options Request options to apply to the given
+     * @param array  $options           Request options to apply to the given
      *                                  request and to the transfer.
+     *
      * @return array response
      * @throws ClientException
      */
@@ -182,11 +204,11 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     {
         $request = $this->client->createRequest($method, $uri);
 
-        $key = $method === Http::GET ? 'query' : 'form_params';
-        $options[$key] = $this->signRequest(
+        $key             = $method === Http::GET ? 'query' : 'form_params';
+        $options[ $key ] = $this->signRequest(
             $method,
             $request->getUri()->__toString(),
-            $options[$key] ?? []
+            $options[ $key ] ?? []
         );
 
         return $this->processResponse(
@@ -197,17 +219,19 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     /**
      * @param string $method
      * @param string $uri
-     * @param array $query
+     * @param array  $query
+     *
      * @return array
      */
     protected function signRequest(string $method, string $uri, array $query): array
     {
-        $query = array_merge($query, [
-            'tonce' => $this->getTonce(),
-            'access_key' => $this->options['publicKey'],
-        ]);
+        $query = array_merge($query,
+            [
+                'tonce'      => $this->getTonce(),
+                'access_key' => $this->options['publicKey'],
+            ]);
         ksort($query, SORT_STRING);
-        $sign = implode('|', [$method, $uri, http_build_query($query)]);
+        $sign               = implode('|', [$method, $uri, http_build_query($query)]);
         $query['signature'] = hash_hmac('SHA256', $sign, $this->options['secretKey']);
 
         return $query;
