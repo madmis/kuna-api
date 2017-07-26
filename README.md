@@ -41,7 +41,7 @@ $api = new KunaApi(
 );
 $timestamp = $api->shared()->timestamp();
 ```
-###Mapping
+### Mapping
 
 Each endpoint response (exclude: timestamp) can be received as `array` or as `object`.
 
@@ -74,7 +74,7 @@ $issue = $api->signed()->activeOrders(Http::PAIR_ETHUAH, true);
 ] 
 ```
 
-###Error handling
+### Error handling
 Each client request errors wrapped to custom exception **madmis\KunaApi\Exception\ClientException**  
 
 ```php
