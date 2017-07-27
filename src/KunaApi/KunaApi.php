@@ -3,10 +3,10 @@
 namespace madmis\KunaApi;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use madmis\KunaApi\Client\ClientInterface;
-use madmis\KunaApi\Client\GuzzleClient;
-use madmis\KunaApi\Endpoint\EndpointFactory;
-use madmis\KunaApi\Endpoint\EndpointInterface;
+use madmis\ExchangeApi\Client\ClientInterface;
+use madmis\ExchangeApi\Client\GuzzleClient;
+use madmis\ExchangeApi\Endpoint\EndpointFactory;
+use madmis\ExchangeApi\Endpoint\EndpointInterface;
 use madmis\KunaApi\Endpoint\PrivateEndpoint;
 use madmis\KunaApi\Endpoint\PublicEndpoint;
 

@@ -11,11 +11,9 @@
     "type": "library",
     "require": {
         "php": "^7.1",
-        "guzzlehttp/psr7": "^1.4",
-        "guzzlehttp/guzzle": "^6.3",
         "doctrine/annotations": "^1.4",
         "symfony/options-resolver": "^3.3",
-        "jms/serializer": "^1.8"
+        "madmis/exchange-api": "^0.1"
     },
     "autoload": {
         "psr-4": {

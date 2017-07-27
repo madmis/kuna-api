@@ -3,7 +3,7 @@
 namespace Endpoint;
 
 use GuzzleHttp\Psr7\Response;
-use madmis\KunaApi\Client\GuzzleClient;
+use madmis\ExchangeApi\Client\GuzzleClient;
 use madmis\KunaApi\Endpoint\PublicEndpoint;
 use PHPUnit\Framework\TestCase;
 

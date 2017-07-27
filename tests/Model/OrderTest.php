@@ -24,8 +24,7 @@ class OrderTest extends TestCase
         $model->setMarket('usd');
         $model->setId(1);
         $model->setExecutedVolume(10);
-        $date = new \DateTime();
-        $model->setCreatedAt($date);
+        $model->setCreatedAt('2017-07-27T08:57:27+03:00');
         $model->setAvgPrice(0);
 
         static::assertEquals(10, $model->getVolume());
@@ -38,7 +37,10 @@ class OrderTest extends TestCase
         static::assertEquals('usd', $model->getMarket());
         static::assertEquals(1, $model->getId());
         static::assertEquals(10, $model->getExecutedVolume());
-        static::assertEquals($date, $model->getCreatedAt());
+        static::assertEquals(
+            new \DateTime('2017-07-27T08:57:27+03:00'),
+            $model->getCreatedAt()
+        );
         static::assertEquals(0, $model->getAvgPrice());
     }
 }

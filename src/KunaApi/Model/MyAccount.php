@@ -2,32 +2,25 @@
 
 namespace madmis\KunaApi\Model;
 
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\AccessType;
-
 /**
  * Class MyAccount
  * @package madmis\KunaApi\Model
- * @AccessType("public_method")
  */
 class MyAccount
 {
     /**
-     * @Type("string")
      * @var string
      */
     protected $currency;
 
     /**
      * Account balance
-     * @Type("float")
      * @var float
      */
     private $balance;
 
     /**
      * Locked amount
-     * @Type("float")
      * @var float
      */
     private $locked;

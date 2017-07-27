@@ -2,8 +2,10 @@
 
 namespace madmis\KunaApi\Endpoint;
 
-use madmis\KunaApi\Exception\ClientException;
-use madmis\KunaApi\Http;
+use madmis\ExchangeApi\Endpoint\AbstractEndpoint;
+use madmis\ExchangeApi\Endpoint\EndpointInterface;
+use madmis\ExchangeApi\Exception\ClientException;
+use madmis\KunaApi\Api;
 use madmis\KunaApi\Model\History;
 use madmis\KunaApi\Model\Order;
 use madmis\KunaApi\Model\Ticker;
@@ -21,7 +23,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
      */
     public function timestamp(): int
     {
-        $request = $this->client->createRequest(Http::GET, $this->getApiUrn(['timestamp']));
+        $request  = $this->client->createRequest(Api::GET, $this->getApiUrn(['timestamp']));
         $response = $this->client->send($request);
 
         return (int)$response->getBody()->getContents();
@@ -29,16 +31,17 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|Ticker
      * @throws ClientException
      */
     public function tickers(string $pair, bool $mapping = false)
     {
-        $response = $this->sendRequest(Http::GET, $this->getApiUrn(['tickers', $pair]));
+        $response = $this->sendRequest(Api::GET, $this->getApiUrn(['tickers', $pair]));
 
         if ($mapping) {
-            $data = array_merge(['at' => $response['at']], $response['ticker']);
+            $data     = array_merge(['at' => $response['at']], $response['ticker']);
             $response = $this->deserializeItem($data, Ticker::class);
         }
 
@@ -47,16 +50,17 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|Order[] array with asks and bids
      * @throws ClientException
      */
     public function orderBook(string $pair, bool $mapping = false)
     {
-        $options = [
+        $options  = [
             'query' => ['market' => $pair],
         ];
-        $response = $this->sendRequest(Http::GET, $this->getApiUrn(['order_book']), $options);
+        $response = $this->sendRequest(Api::GET, $this->getApiUrn(['order_book']), $options);
 
         if ($mapping) {
             $response = [
@@ -70,7 +74,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|Order[]
      * @throws ClientException
      */
@@ -81,7 +86,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|Order[]
      * @throws ClientException
      */
@@ -92,16 +98,17 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool $mapping
+     * @param bool   $mapping
+     *
      * @return array|History[]
      * @throws ClientException
      */
     public function tradesHistory(string $pair, bool $mapping = false)
     {
-        $options = [
+        $options  = [
             'query' => ['market' => $pair],
         ];
-        $response = $this->sendRequest(Http::GET, $this->getApiUrn(['trades']), $options);
+        $response = $this->sendRequest(Api::GET, $this->getApiUrn(['trades']), $options);
 
         if ($mapping) {
             $response = $this->deserializeItems($response, History::class);
@@ -111,10 +118,11 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * @param string $method Http::GET|POST
+     * @param string $method            Http::GET|POST
      * @param string $uri
-     * @param array $options Request options to apply to the given
+     * @param array  $options           Request options to apply to the given
      *                                  request and to the transfer.
+     *
      * @return array response
      * @throws ClientException
      */

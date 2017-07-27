@@ -2,7 +2,11 @@
 
 namespace madmis\KunaApi;
 
-class Http
+/**
+ * Class Api
+ * @package madmis\KunaApi
+ */
+final class Api
 {
     const GET = 'GET';
     const POST = 'POST';

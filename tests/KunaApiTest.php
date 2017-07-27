@@ -10,7 +10,7 @@ class KunaApiTest extends \PHPUnit\Framework\TestCase
     {
         $api = new \madmis\KunaApi\KunaApi('http://localhost', 'pub', 'sec');
 
-        $api->setClient(new \GuzzleHttp\Client());
+        $api->setClient(new \GuzzleHttp\Client([]));
     }
 
     public function testGetClient()
@@ -18,14 +18,14 @@ class KunaApiTest extends \PHPUnit\Framework\TestCase
         $api = new \madmis\KunaApi\KunaApi('http://localhost', 'pub', 'sec');
 
         $this->assertInstanceOf(
-            \madmis\KunaApi\Client\GuzzleClient::class,
+            \madmis\ExchangeApi\Client\GuzzleClient::class,
             $api->getClient()
         );
 
-        $mock = $this->createMock(\madmis\KunaApi\Client\ClientInterface::class);
+        $mock = $this->createMock(\madmis\ExchangeApi\Client\ClientInterface::class);
         $api->setClient($mock);
         $this->assertInstanceOf(
-            \madmis\KunaApi\Client\ClientInterface::class,
+            \madmis\ExchangeApi\Client\ClientInterface::class,
             $api->getClient()
         );
     }

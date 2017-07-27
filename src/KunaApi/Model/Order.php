@@ -2,96 +2,80 @@
 
 namespace madmis\KunaApi\Model;
 
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\AccessType;
-
 /**
  * Class Order
  * @package madmis\KunaApi\Model
- * @AccessType("public_method")
  */
 class Order
 {
     /**
      * Order id
-     * @Type("integer")
      * @var int
      */
     private $id;
 
     /**
      * sell | buy
-     * @Type("string")
      * @var string
      */
     private $side;
 
     /**
      * Order type - limit | market,
-     * @Type("string")
      * @var string
      */
     private $ordType;
 
     /**
      * Base currency price
-     * @Type("float")
      * @var float
      */
     private $price;
 
     /**
      * Average order price. For new order - 0
-     * @Type("float")
      * @var float
      */
     private $avgPrice;
 
     /**
      * Order state - always "wait"
-     * @Type("string")
      * @var string
      */
     private $state;
 
     /**
      * Trade pair
-     * @Type("string")
      * @var string
      */
     private $market;
 
     /**
      * Order time
-     * @Type("DateTime<'Y-m-d\TH:i:sP'>")
      * @var \DateTime
      */
     private $createdAt;
 
     /**
      * Order volume in base currency
-     * @Type("float")
      * @var float
      */
     private $volume;
 
     /**
      * Remaining volume in base currency
-     * @Type("float")
      * @var float
      */
     private $remainingVolume;
 
     /**
      * Executed volume in base currency
-     * @Type("float")
      * @var float
      */
     private $executedVolume;
 
     /**
      * Number of transactions on this order
-     * @Type("integer")
      * @var int
      */
     private $tradesCount;
@@ -217,11 +201,11 @@ class Order
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param string $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(string $createdAt): void
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime($createdAt);
     }
 
     /**

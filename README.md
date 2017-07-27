@@ -75,10 +75,10 @@ $issue = $api->signed()->activeOrders(Http::PAIR_ETHUAH, true);
 ```
 
 ### Error handling
-Each client request errors wrapped to custom exception **madmis\KunaApi\Exception\ClientException**  
+Each client request errors wrapped to custom exception **madmis\ExchangeApi\Exception\ClientException**  
 
 ```php
-class madmis\KunaApi\Exception\ClientException {
+class madmis\ExchangeApi\Exception\ClientException {
   private $request => class GuzzleHttp\Psr7\Request
   private $response => NULL
   protected $message => "cURL error 7: Failed to connect to 127.0.0.1 port 8080: Connection refused (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)"
@@ -89,7 +89,7 @@ class madmis\KunaApi\Exception\ClientException {
 **ClientException** contains original **request object** and **response object** if response available
 
 ```php
-class madmis\KunaApi\Exception\ClientException {
+class madmis\ExchangeApi\Exception\ClientException {
   private $request => class GuzzleHttp\Psr7\Request 
   private $response => class GuzzleHttp\Psr7\Response {
     private $reasonPhrase => "Unauthorized"
@@ -106,7 +106,7 @@ So, to handle errors use try/catch
 ```php
 try {
     $api->signed()->activeOrders(Http::PAIR_ETHUAH, true);
-} catch (madmis\KunaApi\Exception\ClientException $ex) {
+} catch (madmis\ExchangeApi\Exception\ClientException $ex) {
     // any actions (log error, send email, ...) 
 }
 ``` 
@@ -117,10 +117,6 @@ To run the tests, you'll need to install [phpunit](https://phpunit.de/).
 Easiest way to do this is through composer.
 
     composer install
-
-Tests required running php built in server on 8000 port.
-
-    php -S localhost:8000
 
 ### Running Unit tests
 

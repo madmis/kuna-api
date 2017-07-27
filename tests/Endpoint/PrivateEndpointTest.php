@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class PrivateEndpointTest
+ */
 class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -7,7 +10,7 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testNoOptions()
     {
-        $client = new \madmis\KunaApi\Client\GuzzleClient('', '', []);
+        $client = new \madmis\ExchangeApi\Client\GuzzleClient('', '', []);
 
         new \madmis\KunaApi\Endpoint\PrivateEndpoint($client);
     }
@@ -17,7 +20,7 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testInvalidTypeOption()
     {
-        $client = new \madmis\KunaApi\Client\GuzzleClient('', '', []);
+        $client = new \madmis\ExchangeApi\Client\GuzzleClient('', '', []);
 
         new \madmis\KunaApi\Endpoint\PrivateEndpoint($client, ['publicKey' => '', 'secretKey' => null]);
     }

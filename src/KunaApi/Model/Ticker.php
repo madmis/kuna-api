@@ -2,67 +2,55 @@
 
 namespace madmis\KunaApi\Model;
 
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\AccessType;
-
 /**
  * Class Ticker
  * @package madmis\KunaApi\Model
- * @AccessType("public_method")
  */
 class Ticker
 {
     /**
-     * @Type("integer")
      * @var int
      */
     private $at;
 
     /**
      * Base currency price for buy
-     * @Type("float")
      * @var float
      */
     private $buy;
 
     /**
      * Base currency price for sell
-     * @Type("float")
      * @var float
      */
     private $sell;
 
     /**
      * The lowest transaction price for 24 hours
-     * @Type("float")
      * @var float
      */
     private $low;
 
     /**
      * The highest transaction price for 24 hours
-     * @Type("float")
      * @var float
      */
     private $high;
 
     /**
      * Last transaction price
-     * @Type("float")
      * @var float
      */
     private $last;
 
     /**
      * Trading volume in base currency for 24 hours
-     * @Type("float")
      * @var float
      */
     private $vol;
 
     /**
      * Total trading amount in quoted currency for 24 hours
-     * @Type("float")
      * @var float
      */
     private $price;

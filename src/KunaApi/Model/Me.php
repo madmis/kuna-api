@@ -2,30 +2,23 @@
 
 namespace madmis\KunaApi\Model;
 
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\AccessType;
-
 /**
  * Class Me
  * @package madmis\KunaApi\Model
- * @AccessType("public_method")
  */
 class Me
 {
     /**
-     * @Type("string")
      * @var string
      */
     protected $email;
 
     /**
-     * @Type("boolean")
      * @var bool
      */
     protected $activated;
 
     /**
-     * @Type("array<madmis\KunaApi\Model\MyAccount>")
      * @var array|MyAccount[]
      */
     protected $accounts;

@@ -2,61 +2,50 @@
 
 namespace madmis\KunaApi\Model;
 
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\AccessType;
-
 /**
  * Class History
  * @package madmis\KunaApi\Model
- * @AccessType("public_method")
  */
 class History
 {
     /**
      * Order id
-     * @Type("integer")
      * @var int
      */
     private $id;
 
     /**
      * Price for base currency
-     * @Type("float")
      * @var float
      */
     private $price;
 
     /**
      * Volume in base currency
-     * @Type("float")
      * @var float
      */
     private $volume;
 
     /**
      * Volume in quote currency
-     * @Type("float")
      * @var float
      */
     private $funds;
 
     /**
      * Trade pair
-     * @Type("string")
      * @var string
      */
     private $market;
 
     /**
      * Order time
-     * @Type("DateTime<'Y-m-d\TH:i:sP'>")
      * @var \DateTime
      */
     private $createdAt;
 
     /**
      * Always null
-     * @Type("string")
      * @var string
      */
     private $side;
@@ -150,11 +139,11 @@ class History
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param string $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(string $createdAt): void
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime($createdAt);
     }
 
     /**

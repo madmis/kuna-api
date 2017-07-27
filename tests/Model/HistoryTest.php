@@ -12,8 +12,7 @@ class HistoryTest extends TestCase
         $model = new History();
         $model->setId(1);
         $model->setFunds(10);
-        $date = new \DateTime();
-        $model->setCreatedAt($date);
+        $model->setCreatedAt('2017-07-27T08:57:27+03:00');
         $model->setMarket('usd');
         $model->setPrice(1000);
         $model->setSide('sell');
@@ -22,7 +21,10 @@ class HistoryTest extends TestCase
 
         static::assertEquals(1, $model->getId());
         static::assertEquals(10, $model->getFunds());
-        static::assertEquals($date, $model->getCreatedAt());
+        static::assertEquals(
+            new \DateTime('2017-07-27T08:57:27+03:00'),
+            $model->getCreatedAt()
+        );
         static::assertEquals('usd', $model->getMarket());
         static::assertEquals(1000, $model->getPrice());
         static::assertEquals('sell', $model->getSide());

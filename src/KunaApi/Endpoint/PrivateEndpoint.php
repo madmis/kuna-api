@@ -2,10 +2,12 @@
 
 namespace madmis\KunaApi\Endpoint;
 
-use madmis\KunaApi\Client\ClientInterface;
-use madmis\KunaApi\Exception\ClientException;
+use madmis\ExchangeApi\Client\ClientInterface;
+use madmis\ExchangeApi\Endpoint\AbstractEndpoint;
+use madmis\ExchangeApi\Endpoint\EndpointInterface;
+use madmis\ExchangeApi\Exception\ClientException;
+use madmis\KunaApi\Api;
 use madmis\KunaApi\Exception\IncorrectResponseException;
-use madmis\KunaApi\Http;
 use madmis\KunaApi\Model\History;
 use madmis\KunaApi\Model\Me;
 use madmis\KunaApi\Model\Order;
@@ -38,7 +40,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
      */
     public function me(bool $mapping = false)
     {
-        $response = $this->sendRequest(Http::GET, $this->getApiUrn(['members', 'me']));
+        $response = $this->sendRequest(Api::GET, $this->getApiUrn(['members', 'me']));
 
         if ($mapping) {
             $response = $this->deserializeItem($response, Me::class);
@@ -96,7 +98,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
             ],
         ];
 
-        $response = $this->sendRequest(Http::POST, $this->getApiUrn(['orders']), $options);
+        $response = $this->sendRequest(Api::POST, $this->getApiUrn(['orders']), $options);
 
         if ($mapping) {
             $response = $this->deserializeItem($response, Order::class);
@@ -115,7 +117,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     public function cancelOrder(int $orderId, bool $mapping = false)
     {
         $options  = ['form_params' => ['id' => $orderId]];
-        $response = $this->sendRequest(Http::POST, $this->getApiUrn(['order', 'delete']), $options);
+        $response = $this->sendRequest(Api::POST, $this->getApiUrn(['order', 'delete']), $options);
 
         if ($mapping) {
             $response = $this->deserializeItem($response, Order::class);
@@ -140,9 +142,9 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 
         //sometimes instead of active orders
         // this request return market cap (https://kuna.io/api/v2/order_book?market=btcuah)
-        $response = $this->sendRequest(Http::GET, $this->getApiUrn(['orders']), $options);
+        $response = $this->sendRequest(Api::GET, $this->getApiUrn(['orders']), $options);
 
-        if (empty($response[0]['id'])) {
+        if ($response && empty($response[0]['id'])) {
             throw new IncorrectResponseException(
                 'Incorrect response',
                 $this->client->getLastRequest(),
@@ -169,7 +171,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
         $options  = [
             'query' => ['market' => $pair],
         ];
-        $response = $this->sendRequest(Http::GET, $this->getApiUrn(['trades', 'my']), $options);
+        $response = $this->sendRequest(Api::GET, $this->getApiUrn(['trades', 'my']), $options);
 
         if ($mapping) {
             $response = $this->deserializeItems($response, History::class);
@@ -204,7 +206,7 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     {
         $request = $this->client->createRequest($method, $uri);
 
-        $key             = $method === Http::GET ? 'query' : 'form_params';
+        $key             = $method === Api::GET ? 'query' : 'form_params';
         $options[ $key ] = $this->signRequest(
             $method,
             $request->getUri()->__toString(),
