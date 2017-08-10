@@ -108,11 +108,11 @@ class PublicEndpointTest extends TestCase
             ->will($this->returnValue([['id' => 10]]))
         ;
 
-        $response = $mock->tradesHistory('usd', false);
+        $response = $mock->tradesHistory('usd', 50, false);
         static::assertInternalType('array', $response);
         static::assertEquals(10, $response[0]['id']);
 
-        $response = $mock->tradesHistory('usd', true);
+        $response = $mock->tradesHistory('usd', 50, true);
         static::assertInstanceOf(\madmis\KunaApi\Model\History::class, $response[0]);
 
     }
