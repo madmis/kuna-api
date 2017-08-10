@@ -23,7 +23,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
      */
     public function timestamp(): int
     {
-        $request  = $this->client->createRequest(Api::GET, $this->getApiUrn(['timestamp']));
+        $request = $this->client->createRequest(Api::GET, $this->getApiUrn(['timestamp']));
         $response = $this->client->send($request);
 
         return (int)$response->getBody()->getContents();
@@ -31,7 +31,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool   $mapping
+     * @param bool $mapping
      *
      * @return array|Ticker
      * @throws ClientException
@@ -41,7 +41,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
         $response = $this->sendRequest(Api::GET, $this->getApiUrn(['tickers', $pair]));
 
         if ($mapping) {
-            $data     = array_merge(['at' => $response['at']], $response['ticker']);
+            $data = array_merge(['at' => $response['at']], $response['ticker']);
             $response = $this->deserializeItem($data, Ticker::class);
         }
 
@@ -50,14 +50,14 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool   $mapping
+     * @param bool $mapping
      *
      * @return array|Order[] array with asks and bids
      * @throws ClientException
      */
     public function orderBook(string $pair, bool $mapping = false)
     {
-        $options  = [
+        $options = [
             'query' => ['market' => $pair],
         ];
         $response = $this->sendRequest(Api::GET, $this->getApiUrn(['order_book']), $options);
@@ -74,7 +74,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool   $mapping
+     * @param bool $mapping
      *
      * @return array|Order[]
      * @throws ClientException
@@ -86,7 +86,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool   $mapping
+     * @param bool $mapping
      *
      * @return array|Order[]
      * @throws ClientException
@@ -98,15 +98,19 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 
     /**
      * @param string $pair
-     * @param bool   $mapping
+     * @param int $limit
+     * @param bool $mapping
      *
      * @return array|History[]
      * @throws ClientException
      */
-    public function tradesHistory(string $pair, bool $mapping = false)
+    public function tradesHistory(string $pair, int $limit = 50, bool $mapping = false)
     {
-        $options  = [
-            'query' => ['market' => $pair],
+        $options = [
+            'query' => [
+                'market' => $pair,
+                'limit' => $limit,
+            ],
         ];
         $response = $this->sendRequest(Api::GET, $this->getApiUrn(['trades']), $options);
 
@@ -118,9 +122,9 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
-     * @param string $method            Http::GET|POST
+     * @param string $method Http::GET|POST
      * @param string $uri
-     * @param array  $options           Request options to apply to the given
+     * @param array $options Request options to apply to the given
      *                                  request and to the transfer.
      *
      * @return array response
