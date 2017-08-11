@@ -54,9 +54,14 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertEquals('email', $response['email']);
         static::assertEquals('uah', $response['accounts'][0]['currency']);
 
+        /** @var \madmis\KunaApi\Model\Me $response */
         $response = $mock->me(true);
 
         static::assertInstanceOf(\madmis\KunaApi\Model\Me::class, $response);
+        static::assertInstanceOf(
+            \madmis\KunaApi\Model\MyAccount::class,
+            $response->getAccounts()[0]
+        );
     }
 
     public function testCreateOrder()
