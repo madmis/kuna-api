@@ -18,6 +18,7 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 {
     /**
      * Unix format timestamp - time from the exchange server
+     * @link https://kuna.io/api/v2/timestamp
      * @return int
      * @throws ClientException
      */
@@ -30,6 +31,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Recent Market Data
+     * @link https://kuna.io/api/v2/tickers/btcuah
      * @param string $pair
      * @param bool $mapping
      *
@@ -49,6 +52,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Order Book
+     * @link https://kuna.io/api/v2/order_book?market=btcuah
      * @param string $pair
      * @param bool $mapping
      *
@@ -73,6 +78,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Asks Order Book
+     * @link https://kuna.io/api/v2/order_book?market=btcuah
      * @param string $pair
      * @param bool $mapping
      *
@@ -85,6 +92,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Bids Order Book
+     * @link https://kuna.io/api/v2/order_book?market=btcuah
      * @param string $pair
      * @param bool $mapping
      *
@@ -97,6 +106,8 @@ class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Trades History
+     * @link https://kuna.io/api/v2/trades?market=btcuah
      * @param string $pair
      * @param int $limit
      * @param bool $mapping

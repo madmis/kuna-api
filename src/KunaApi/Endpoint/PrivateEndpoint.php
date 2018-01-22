@@ -34,6 +34,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Information About the User and Assets
+     * @link https://kuna.io/api/v2/members/me
      * @param bool $mapping
      *
      * @return array|Me
@@ -54,6 +56,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Order Placing - create BUY order
+     * @link https://kuna.io/api/v2/orders
      * @param string $pair
      * @param float $volume volume in base currency
      * @param float $price price per base currency unit
@@ -68,6 +72,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Order Placing - create SELL order
+     * @link https://kuna.io/api/v2/orders
      * @param string $pair
      * @param float $volume volume in base currency
      * @param float $price price per base currency unit
@@ -82,6 +88,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Order Placing
+     * @link https://kuna.io/api/v2/orders
      * @param string $side
      * @param string $pair
      * @param float $volume volume in base currency
@@ -112,6 +120,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Order Cancel
+     * @link https://kuna.io/api/v2/order/delete
      * @param int $orderId
      * @param bool $mapping
      *
@@ -131,6 +141,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * Active User Orders
+     * @link https://kuna.io/api/v2/orders
      * @param string $pair
      * @param bool $mapping
      *
@@ -164,6 +176,8 @@ class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
     }
 
     /**
+     * User Trade History
+     * @link https://kuna.io/api/v2/trades/my
      * @param string $pair
      * @param bool $mapping
      *

@@ -12,6 +12,21 @@
 
 This API client will help you interact with Kuna by REST API. 
  
+## Table Of Contents
+
+- [License](#license)
+- [Kuna REST API Reference](#kuna-rest-api-reference)
+- [Contributing](#contributing)
+- [Install](#install)
+- [Usage](#usage)
+    - [Mapping](#mapping)
+    - [Error handling](#error-handling)
+- [Running the tests](#running-the-tests)
+    - [Running Unit tests](#running-unit-tests)
+- [Library api](#library-api)    
+    - [Shared resources (Public Kuna API)](#shared-resources-public-kuna-api)    
+    - [Private resources (Private Kuna API) ](#private-resources-private-kuna-api)    
+
 
 ## License
 
@@ -138,3 +153,80 @@ Easiest way to do this is through composer.
 [coverage-link]: https://coveralls.io/github/madmis/kuna-api?branch=master
 [coverage-image]: https://coveralls.io/repos/github/madmis/kuna-api/badge.svg?branch=master
 
+## Library api
+
+### Shared resources (Public Kuna API)
+
+* [Time from the exchange server](https://kuna.io/api/v2/timestamp)
+
+    ```php
+    $timestamp = $api->shared()->timestamp();
+    ```
+
+* [Recent Market Data](https://kuna.io/api/v2/tickers/btcuah)
+
+   ```php
+     $tickers = $api->shared()->tickers('btcuah');
+   ```
+
+* [Order Book](https://kuna.io/api/v2/order_book?market=btcuah)
+
+   ```php
+     $orders = $api->shared()->orderBook('btcuah');
+   ```
+
+* [Asks Order Book](https://kuna.io/api/v2/order_book?market=btcuah)
+
+   ```php
+     $orders = $api->shared()->asksOrderBook('btcuah');
+   ```
+
+* [Bids Order Book](https://kuna.io/api/v2/order_book?market=btcuah)
+
+   ```php
+     $orders = $api->shared()->bidsOrderBook('btcuah');
+   ```
+
+* [Trades History](https://kuna.io/api/v2/trades?market=btcuah)
+
+   ```php
+     $orders = $api->shared()->tradesHistory('btcuah');
+   ```
+
+### Private resources (Private Kuna API) 
+
+* [Information About the User and Assets](https://kuna.io/api/v2/members/me)
+
+   ```php
+     $orders = $api->signed()->me();
+   ```
+
+* [Order Placing - create BUY order](https://kuna.io/api/v2/orders)
+
+   ```php
+     $orders = $api->signed()->createBuyOrder('btcuah', 1.00, 350000, true);
+   ```
+
+* [Order Placing - create SELL order](https://kuna.io/api/v2/orders)
+
+   ```php
+     $orders = $api->signed()->createSellOrder('btcuah', 1.00, 420000, true);
+   ```
+
+* [Order Cancel](https://kuna.io/api/v2/order/delete)
+
+   ```php
+     $orders = $api->signed()->cancelOrder(124578, true);
+   ```
+
+* [Active User Orders](https://kuna.io/api/v2/orders)
+
+   ```php
+     $orders = $api->signed()->activeOrders('btcuah', true);
+   ```
+
+* [User Trade History](https://kuna.io/api/v2/trades/my)
+
+   ```php
+     $orders = $api->signed()->myHistory('btcuah', true);
+   ```
