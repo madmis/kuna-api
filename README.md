@@ -44,11 +44,22 @@ or [create pull request](https://github.com/madmis/kuna-api/compare)
 
 ## Install
     
-    composer require madmis/kuna-api 1.0.*
+    composer require cryptopupua/kuna-api 1.0.*
 
 
 ## Usage
 ```php
+require __DIR__.'/vendor/autoload.php';
+
+use cryptopupua\KunaApi\Api;
+use cryptopupua\KunaApi\Exception\IncorrectResponseException;
+use cryptopupua\KunaApi\KunaApi;
+use cryptopupua\KunaApi\Model\History;
+use cryptopupua\KunaApi\Model\MyAccount;
+use cryptopupua\KunaApi\Model\Order;
+use cryptopupua\KunaApi\Model\Ticker;
+
+
 $api = new KunaApi(
     'https://kuna.io',
     'public key',

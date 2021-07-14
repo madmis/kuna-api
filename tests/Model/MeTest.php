@@ -2,8 +2,8 @@
 
 namespace Model;
 
-use madmis\KunaApi\Model\Me;
-use madmis\KunaApi\Model\MyAccount;
+use cryptopupua\KunaApi\Model\Me;
+use cryptopupua\KunaApi\Model\MyAccount;
 use PHPUnit\Framework\TestCase;
 
 /**

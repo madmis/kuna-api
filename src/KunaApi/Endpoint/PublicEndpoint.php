@@ -1,18 +1,18 @@
 <?php
 
-namespace madmis\KunaApi\Endpoint;
+namespace cryptopupua\KunaApi\Endpoint;
 
 use madmis\ExchangeApi\Endpoint\AbstractEndpoint;
 use madmis\ExchangeApi\Endpoint\EndpointInterface;
 use madmis\ExchangeApi\Exception\ClientException;
-use madmis\KunaApi\Api;
-use madmis\KunaApi\Model\History;
-use madmis\KunaApi\Model\Order;
-use madmis\KunaApi\Model\Ticker;
+use cryptopupua\KunaApi\Api;
+use cryptopupua\KunaApi\Model\History;
+use cryptopupua\KunaApi\Model\Order;
+use cryptopupua\KunaApi\Model\Ticker;
 
 /**
  * Class PublicEndpoint
- * @package madmis\KunaApi\Endpoint
+ * @package cryptopupua\KunaApi\Endpoint
  */
 class PublicEndpoint extends AbstractEndpoint implements EndpointInterface
 {

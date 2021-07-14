@@ -1,10 +1,10 @@
 <?php
 
-namespace madmis\KunaApi;
+namespace cryptopupua\KunaApi;
 
 /**
  * Class Api
- * @package madmis\KunaApi
+ * @package cryptopupua\KunaApi
  */
 final class Api
 {

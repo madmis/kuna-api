@@ -2,7 +2,7 @@
 
 namespace Model;
 
-use madmis\KunaApi\Model\Ticker;
+use cryptopupua\KunaApi\Model\Ticker;
 use PHPUnit\Framework\TestCase;
 
 class TickerTest extends TestCase

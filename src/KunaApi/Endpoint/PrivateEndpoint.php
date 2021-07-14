@@ -1,23 +1,23 @@
 <?php
 
-namespace madmis\KunaApi\Endpoint;
+namespace cryptopupua\KunaApi\Endpoint;
 
 use madmis\ExchangeApi\Client\ClientInterface;
 use madmis\ExchangeApi\Endpoint\AbstractEndpoint;
 use madmis\ExchangeApi\Endpoint\EndpointInterface;
 use madmis\ExchangeApi\Exception\ClientException;
-use madmis\KunaApi\Api;
-use madmis\KunaApi\Exception\IncorrectResponseException;
-use madmis\KunaApi\Model\History;
-use madmis\KunaApi\Model\Me;
-use madmis\KunaApi\Model\MyAccount;
-use madmis\KunaApi\Model\Order;
+use cryptopupua\KunaApi\Api;
+use cryptopupua\KunaApi\Exception\IncorrectResponseException;
+use cryptopupua\KunaApi\Model\History;
+use cryptopupua\KunaApi\Model\Me;
+use cryptopupua\KunaApi\Model\MyAccount;
+use cryptopupua\KunaApi\Model\Order;
 use Symfony\Component\OptionsResolver\Exception\AccessException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PrivateEndpoint
- * @package madmis\KunaApi\Endpoint
+ * @package cryptopupua\KunaApi\Endpoint
  */
 class PrivateEndpoint extends AbstractEndpoint implements EndpointInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Model;
 
-use madmis\KunaApi\Model\History;
+use cryptopupua\KunaApi\Model\History;
 use PHPUnit\Framework\TestCase;
 
 class HistoryTest extends TestCase

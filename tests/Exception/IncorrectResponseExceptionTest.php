@@ -3,7 +3,7 @@
 namespace Exception;
 
 use GuzzleHttp\Psr7\Request;
-use madmis\KunaApi\Exception\IncorrectResponseException;
+use cryptopupua\KunaApi\Exception\IncorrectResponseException;
 use PHPUnit\Framework\TestCase;
 
 /**
