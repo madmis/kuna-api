@@ -44,7 +44,7 @@ or [create pull request](https://github.com/madmis/kuna-api/compare)
 
 ## Install
     
-    composer require cryptopupua/kuna-api 1.0.*
+    composer require cryptopupua/kuna-api 1.1.*
 
 
 ## Usage
