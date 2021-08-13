@@ -1,10 +1,10 @@
 <?php
 
-namespace madmis\KunaApi\Model;
+namespace cryptopupua\KunaApi\Model;
 
 /**
  * Class History
- * @package madmis\KunaApi\Model
+ * @package cryptopupua\KunaApi\Model
  */
 class History
 {

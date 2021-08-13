@@ -1,12 +1,12 @@
 <?php
 
-namespace madmis\KunaApi\Exception;
+namespace cryptopupua\KunaApi\Exception;
 
 use Psr\Http\Message\RequestInterface;
 
 /**
  * Class IncorrectResponseException
- * @package madmis\KunaApi\Exception
+ * @package cryptopupua\KunaApi\Exception
  */
 class IncorrectResponseException extends \RuntimeException implements KunaApiExceptionInterface
 {

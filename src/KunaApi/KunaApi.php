@@ -1,19 +1,19 @@
 <?php
 
-namespace madmis\KunaApi;
+namespace cryptopupua\KunaApi;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use madmis\ExchangeApi\Client\ClientInterface;
 use madmis\ExchangeApi\Client\GuzzleClient;
 use madmis\ExchangeApi\Endpoint\EndpointFactory;
 use madmis\ExchangeApi\Endpoint\EndpointInterface;
-use madmis\KunaApi\Endpoint\PrivateEndpoint;
-use madmis\KunaApi\Endpoint\PublicEndpoint;
+use cryptopupua\KunaApi\Endpoint\PrivateEndpoint;
+use cryptopupua\KunaApi\Endpoint\PublicEndpoint;
 
 /**
  * Class KunaApi
  *
- * @package madmis\KunaApi
+ * @package cryptopupua\KunaApi
  */
 class KunaApi
 {

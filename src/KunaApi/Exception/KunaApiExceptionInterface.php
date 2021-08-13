@@ -1,10 +1,10 @@
 <?php
 
-namespace madmis\KunaApi\Exception;
+namespace cryptopupua\KunaApi\Exception;
 
 /**
  * Interface KunaApiExceptionInterface
- * @package madmis\KunaApi\Exception
+ * @package cryptopupua\KunaApi\Exception
  */
 interface KunaApiExceptionInterface
 {

@@ -1,5 +1,5 @@
 {
-    "name": "madmis/kuna-api",
+    "name": "cryptopupua/kuna-api",
     "description": "Kuna.io REST API php client",
     "keywords": [
         "kuna.io",
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "madmis\\": "src"
+            "cryptopupua\\": "src"
         }
     },
     "minimum-stability": "stable",

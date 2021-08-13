@@ -12,7 +12,7 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
     {
         $client = new \madmis\ExchangeApi\Client\GuzzleClient('', '', []);
 
-        new \madmis\KunaApi\Endpoint\PrivateEndpoint($client);
+        new \cryptopupua\KunaApi\Endpoint\PrivateEndpoint($client);
     }
 
     /**
@@ -22,12 +22,12 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
     {
         $client = new \madmis\ExchangeApi\Client\GuzzleClient('', '', []);
 
-        new \madmis\KunaApi\Endpoint\PrivateEndpoint($client, ['publicKey' => '', 'secretKey' => null]);
+        new \cryptopupua\KunaApi\Endpoint\PrivateEndpoint($client, ['publicKey' => '', 'secretKey' => null]);
     }
 
     public function testMe()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PrivateEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PrivateEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -54,19 +54,19 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertEquals('email', $response['email']);
         static::assertEquals('uah', $response['accounts'][0]['currency']);
 
-        /** @var \madmis\KunaApi\Model\Me $response */
+        /** @var \cryptopupua\KunaApi\Model\Me $response */
         $response = $mock->me(true);
 
-        static::assertInstanceOf(\madmis\KunaApi\Model\Me::class, $response);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Me::class, $response);
         static::assertInstanceOf(
-            \madmis\KunaApi\Model\MyAccount::class,
+            \cryptopupua\KunaApi\Model\MyAccount::class,
             $response->getAccounts()[0]
         );
     }
 
     public function testCreateOrder()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PrivateEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PrivateEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -89,12 +89,12 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertEquals('buy', $response['side']);
 
         $response = $mock->createBuyOrder('uah', 1, 10, true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Order::class, $response);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Order::class, $response);
     }
 
     public function testCancelOrder()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PrivateEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PrivateEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -113,12 +113,12 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertEquals(1, $response['id']);
 
         $response = $mock->cancelOrder(1, true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Order::class, $response);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Order::class, $response);
     }
 
     public function testActiveOrders()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PrivateEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PrivateEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -140,12 +140,12 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
         $response = $mock->activeOrders('usd', true);
         static::assertInternalType('array', $response);
         static::assertCount(2, $response);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Order::class, $response[0]);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Order::class, $response[0]);
     }
 
     public function testMyHistory()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PrivateEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PrivateEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -167,7 +167,7 @@ class PrivateEndpointTest extends \PHPUnit\Framework\TestCase
         $response = $mock->myHistory('usd', true);
         static::assertInternalType('array', $response);
         static::assertCount(2, $response);
-        static::assertInstanceOf(\madmis\KunaApi\Model\History::class, $response[0]);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\History::class, $response[0]);
     }
 }
 

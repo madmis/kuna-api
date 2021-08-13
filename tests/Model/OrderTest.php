@@ -2,7 +2,7 @@
 
 namespace Model;
 
-use madmis\KunaApi\Model\Order;
+use cryptopupua\KunaApi\Model\Order;
 use PHPUnit\Framework\TestCase;
 
 /**

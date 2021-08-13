@@ -4,7 +4,7 @@ namespace Endpoint;
 
 use GuzzleHttp\Psr7\Response;
 use madmis\ExchangeApi\Client\GuzzleClient;
-use madmis\KunaApi\Endpoint\PublicEndpoint;
+use cryptopupua\KunaApi\Endpoint\PublicEndpoint;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -39,7 +39,7 @@ class PublicEndpointTest extends TestCase
 
     public function testTickers()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PublicEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PublicEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -58,13 +58,13 @@ class PublicEndpointTest extends TestCase
         static::assertEquals(10, $response['ticker']['buy']);
 
         $response = $mock->tickers('usd', true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Ticker::class, $response);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Ticker::class, $response);
 
     }
 
     public function testOrderBook()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PublicEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PublicEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -84,20 +84,20 @@ class PublicEndpointTest extends TestCase
         static::assertArrayHasKey('bids', $response);
 
         $response = $mock->orderBook('usd', true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Order::class, $response['bids'][0]);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Order::class, $response['bids'][0]);
 
         $response = $mock->asksOrderBook('usd', true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Order::class, $response[0]);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Order::class, $response[0]);
         static::assertEquals(1, $response[0]->getId());
 
         $response = $mock->bidsOrderBook('usd', true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\Order::class, $response[0]);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\Order::class, $response[0]);
         static::assertEquals(2, $response[0]->getId());
     }
 
     public function testTradesHistory()
     {
-        $mock = $this->getMockBuilder(\madmis\KunaApi\Endpoint\PublicEndpoint::class)
+        $mock = $this->getMockBuilder(\cryptopupua\KunaApi\Endpoint\PublicEndpoint::class)
             ->disableOriginalConstructor()
             ->setMethods(['sendRequest', 'getApiUrn'])
             ->getMock()
@@ -113,7 +113,7 @@ class PublicEndpointTest extends TestCase
         static::assertEquals(10, $response[0]['id']);
 
         $response = $mock->tradesHistory('usd', 50, true);
-        static::assertInstanceOf(\madmis\KunaApi\Model\History::class, $response[0]);
+        static::assertInstanceOf(\cryptopupua\KunaApi\Model\History::class, $response[0]);
 
     }
 }
